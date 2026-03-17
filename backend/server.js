@@ -15,7 +15,13 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 /* ─── Middleware ─── */
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+const corsOrigins = [
+  "http://localhost:5173", // Local dev
+  "http://localhost:3000",  // Alternative local
+  process.env.FRONTEND_URL, // Production frontend URL
+].filter(Boolean);
+
+app.use(cors({ origin: corsOrigins, credentials: true }));
 app.use(express.json());
 
 /* ─── DB ─── */
