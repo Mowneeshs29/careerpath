@@ -1,0 +1,24 @@
+{
+  "name": "career-rec-system",
+  "version": "1.0.0",
+  "description": "A full-stack MERN application that helps students and job seekers identify suitable career paths based on skills, education, interests, and preferences.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mowneeshs29/careerpath.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Mowneeshs29/careerpath/issues"
+  },
+  "homepage": "https://github.com/Mowneeshs29/careerpath#readme",
+  "devDependencies": {
+    "vite": "^8.0.0"
+  }
+}
