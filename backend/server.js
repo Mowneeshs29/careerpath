@@ -21,7 +21,26 @@ const corsOrigins = [
   process.env.FRONTEND_URL, // Production frontend URL
 ].filter(Boolean);
 
-app.use(cors({ origin: corsOrigins, credentials: true }));
+// Allow the frontend origin (or any origin in production) to avoid CORS failures.
+// In production, `FRONTEND_URL` should be set to your deployed frontend URL.
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow non-browser requests (e.g., Postman) or same-origin
+      if (!origin) return callback(null, true);
+
+      if (corsOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      // Use this for debugging: log blocked origins
+      console.warn("Blocked CORS request from:", origin);
+      return callback(new Error("Not allowed by CORS"), false);
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 /* ─── DB ─── */
