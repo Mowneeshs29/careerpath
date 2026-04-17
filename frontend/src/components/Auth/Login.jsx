@@ -38,43 +38,43 @@ const Login = () => {
   };
 
   return (
-    <div className="page-enter" style={{ maxWidth: 440, margin: "2.5rem auto", padding: "0 1.25rem" }}>
-      <div className="card" style={{ padding: "2.2rem 2rem" }}>
+    <div className="page-enter max-w-[440px] mx-auto my-10 px-5">
+      <div className="bg-white rounded-2xl shadow-md border border-slate-100 p-8 md:p-10">
         {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: "1.8rem" }}>
-          <h1 style={{ fontSize: "1.6rem", marginBottom: "0.3rem" }}>Welcome back</h1>
-          <p style={{ color: "var(--clr-text-muted)", fontSize: "0.9rem" }}>Sign in to continue your journey</p>
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-extrabold text-slate-800 mb-1 tracking-tight">Welcome back</h1>
+          <p className="text-sm font-medium text-slate-500">Sign in to continue your journey</p>
         </div>
 
         {apiError && (
-          <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "var(--radius-sm)", padding: "0.6rem 0.8rem", marginBottom: "1rem", fontSize: "0.85rem", color: "var(--clr-danger)" }}>
+          <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg px-4 py-3 mb-5 text-sm font-medium">
             {apiError}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <InputField label="Email" type="email" name="email" value={form.email} placeholder="you@example.com" required error={errors.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })} />
 
           <div>
-            <InputField label="Password" type="password" name="password" value={form.password} placeholder="password" required error={errors.password}
+            <InputField label="Password" type="password" name="password" value={form.password} placeholder="••••••••" required error={errors.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })} />
             
             {/* FORGOT PASSWORD LINK */}
-            <div style={{ textAlign: "right", marginTop: "0.4rem" }}>
-              <Link to="/forgot-password" style={{ fontSize: "0.85rem", color: "var(--clr-primary)", textDecoration: "none", fontWeight: 500 }}>
+            <div className="text-right mt-1.5">
+              <Link to="/forgot-password" className="text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors">
                 Forgot password?
               </Link>
             </div>
           </div>
 
-          <Button type="submit" variant="primary" disabled={loading} style={{ marginTop: "0.4rem" }}>
+          <button type="submit" disabled={loading} className="mt-2 w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm shadow-blue-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed">
             {loading ? "Signing in…" : "Sign In"}
-          </Button>
+          </button>
         </form>
 
-        <p style={{ textAlign: "center", marginTop: "1.4rem", fontSize: "0.85rem", color: "var(--clr-text-muted)" }}>
-          Don't have an account? <Link to="/register" style={{ color: "var(--clr-primary)", textDecoration: "none", fontWeight: 600 }}>Sign up</Link>
+        <p className="text-center mt-6 text-sm font-medium text-slate-500">
+          Don't have an account? <Link to="/register" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">Sign up</Link>
         </p>
       </div>
     </div>

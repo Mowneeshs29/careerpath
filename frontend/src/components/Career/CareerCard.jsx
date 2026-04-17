@@ -6,23 +6,21 @@ const CareerCard = ({ career }) => {
   const { _id, title, category, description, requiredSkills, salaryRange, matchScore } = career;
 
   return (
-    <Link to={`/careers/${_id}`} style={{ textDecoration: "none", color: "inherit" }}>
-      <div className="card" style={{ padding: "1.4rem", display: "flex", flexDirection: "column", gap: "0.7rem", height: "100%", transition: "transform var(--transition), box-shadow var(--transition)" }}
-        onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; }}
-      >
+    <Link to={`/careers/${_id}`} className="block h-full group outline-none">
+      <div className="bg-white rounded-2xl p-6 flex flex-col gap-4 h-full shadow-sm border border-slate-100 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-md group-hover:border-blue-100 group-focus-visible:ring-2 group-focus-visible:ring-blue-500">
         {/* Header row */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-          <span style={{ fontSize: "1.4rem" }}>{categoryIcon(category)}</span>
+        <div className="flex justify-between items-start">
+          <div className="w-12 h-12 flex items-center justify-center rounded-xl bg-slate-50 text-2xl group-hover:bg-blue-50 transition-colors">
+            {categoryIcon(category)}
+          </div>
           {matchScore !== undefined && (
-            <span style={{
-              background: "rgba(108,99,255,0.08)",
-              color: scoreColor(matchScore),
-              fontSize: "0.78rem",
-              fontWeight: 700,
-              padding: "0.22rem 0.6rem",
-              borderRadius: "99px",
-            }}>
+            <span 
+              className="text-xs font-bold px-3 py-1.5 rounded-full"
+              style={{
+                color: scoreColor(matchScore),
+                backgroundColor: `${scoreColor(matchScore)}15`
+              }}
+            >
               {matchScore}% match
             </span>
           )}
@@ -30,31 +28,36 @@ const CareerCard = ({ career }) => {
 
         {/* Title + category */}
         <div>
-          <h3 style={{ fontSize: "1.05rem", margin: 0, color: "var(--clr-text)" }}>{title}</h3>
-          <span style={{ fontSize: "0.78rem", color: "var(--clr-text-muted)", textTransform: "uppercase", letterSpacing: "0.04em" }}>{category}</span>
+          <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors leading-tight mb-1">{title}</h3>
+          <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{category}</span>
         </div>
 
         {/* Description snippet */}
-        <p style={{ fontSize: "0.85rem", color: "var(--clr-text-muted)", margin: 0, display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+        <p className="text-sm text-slate-500 line-clamp-2 leading-relaxed h-10">
           {description}
         </p>
 
         {/* Skills */}
         {requiredSkills?.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+          <div className="flex flex-wrap gap-1.5 mt-1">
             {requiredSkills.slice(0, 4).map((s) => (
-              <span key={s} className="tag">{s}</span>
+              <span key={s} className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-md border border-slate-200">
+                {s}
+              </span>
             ))}
             {requiredSkills.length > 4 && (
-              <span className="tag" style={{ background: "var(--clr-bg)", color: "var(--clr-text-muted)" }}>+{requiredSkills.length - 4}</span>
+              <span className="bg-slate-50 text-slate-400 text-xs font-semibold px-2.5 py-1 rounded-md border border-slate-100">
+                +{requiredSkills.length - 4}
+              </span>
             )}
           </div>
         )}
 
         {/* Salary */}
         {salaryRange?.min && (
-          <div style={{ marginTop: "auto", fontSize: "0.84rem", color: "var(--clr-text-muted)" }}>
-            💰 {formatCurrency(salaryRange.min)} – {formatCurrency(salaryRange.max)}
+          <div className="mt-auto pt-4 border-t border-slate-50 text-sm font-semibold text-slate-600 flex items-center gap-2">
+            <span className="text-slate-400">💰</span>
+            {formatCurrency(salaryRange.min)} – {formatCurrency(salaryRange.max)}
           </div>
         )}
       </div>

@@ -72,30 +72,30 @@ const ProfileForm = () => {
 
   /* ─── Tag chip row ─── */
   const TagRow = ({ tags, onRemove }) => (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginTop: "0.3rem" }}>
+    <div className="flex flex-wrap gap-2 mt-3">
       {tags.map((t) => (
-        <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", background: "#eef0ff", color: "var(--clr-primary)", fontSize: "0.78rem", fontWeight: 600, padding: "0.2rem 0.6rem", borderRadius: "99px" }}>
+        <span key={t} className="inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1.5 rounded-full border border-blue-100">
           {t}
-          <button type="button" onClick={() => onRemove(t)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--clr-primary)", fontSize: "0.95rem", lineHeight: 1, padding: 0 }}>×</button>
+          <button type="button" onClick={() => onRemove(t)} className="text-blue-500 hover:text-blue-800 text-lg leading-none cursor-pointer p-0 mb-0.5 outline-none">&times;</button>
         </span>
       ))}
     </div>
   );
 
   return (
-    <div className="page-enter">
-      <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.8rem" }}>
+    <div className="animate-in fade-in duration-300">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
 
         {apiError && (
-          <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "var(--radius-sm)", padding: "0.6rem 0.8rem", fontSize: "0.85rem", color: "var(--clr-danger)" }}>
+          <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg py-3 px-4 text-sm font-medium">
             {apiError}
           </div>
         )}
 
         {/* ─ Education ─ */}
-        <div className="card" style={{ padding: "1.5rem" }}>
-          <h3 style={{ fontSize: "1rem", marginBottom: "1rem" }}>🎓 Education</h3>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1rem" }}>
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <h3 className="text-lg font-bold text-slate-800 mb-5">🎓 Education</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <InputField label="Degree" type="select" name="degree" value={education.degree} options={DEGREE_OPTIONS} placeholder="Select degree"
               onChange={(e) => setEducation({ ...education, degree: e.target.value })} />
             <InputField label="Field of Study" name="field" value={education.field} placeholder="e.g. Computer Science"
@@ -108,11 +108,11 @@ const ProfileForm = () => {
         </div>
 
         {/* ─ Skills ─ */}
-        <div className="card" style={{ padding: "1.5rem" }}>
-          <h3 style={{ fontSize: "1rem", marginBottom: "0.6rem" }}>💻 Technical Skills</h3>
-          <p style={{ fontSize: "0.82rem", color: "var(--clr-text-muted)", marginBottom: "0.7rem" }}>Type a skill and press Enter or comma to add</p>
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <h3 className="text-lg font-bold text-slate-800 mb-2">💻 Technical Skills</h3>
+          <p className="text-sm text-slate-500 mb-4 font-medium">Type a skill and press Enter or comma to add</p>
           <input
-            className="input"
+            className="w-full px-4 py-3 border border-slate-200 rounded-lg text-sm bg-slate-50 focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-medium text-slate-700"
             value={skillInput}
             placeholder="e.g. python, react, sql…"
             onChange={(e) => setSkillInput(e.target.value)}
@@ -122,11 +122,11 @@ const ProfileForm = () => {
         </div>
 
         {/* ─ Interests ─ */}
-        <div className="card" style={{ padding: "1.5rem" }}>
-          <h3 style={{ fontSize: "1rem", marginBottom: "0.6rem" }}>🎯 Interests</h3>
-          <p style={{ fontSize: "0.82rem", color: "var(--clr-text-muted)", marginBottom: "0.7rem" }}>What topics excite you?</p>
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <h3 className="text-lg font-bold text-slate-800 mb-2">🎯 Interests</h3>
+          <p className="text-sm text-slate-500 mb-4 font-medium">What topics excite you?</p>
           <input
-            className="input"
+            className="w-full px-4 py-3 border border-slate-200 rounded-lg text-sm bg-slate-50 focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all font-medium text-slate-700"
             value={interestInput}
             placeholder="e.g. data analysis, design…"
             onChange={(e) => setInterestInput(e.target.value)}
@@ -136,22 +136,22 @@ const ProfileForm = () => {
         </div>
 
         {/* ─ Salary ─ */}
-        <div className="card" style={{ padding: "1.5rem" }}>
-          <h3 style={{ fontSize: "1rem", marginBottom: "0.8rem" }}>💰 Salary Expectation (USD)</h3>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-            <InputField label="Minimum" type="number" name="min" value={salary.min} placeholder="3000"
+        <div className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100">
+          <h3 className="text-lg font-bold text-slate-800 mb-5">💰 Salary Expectation (USD)</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <InputField label="Minimum" type="number" name="min" value={salary.min} placeholder="30000"
               onChange={(e) => setSalary({ ...salary, min: e.target.value })} />
-            <InputField label="Maximum" type="number" name="max" value={salary.max} placeholder="20000"
+            <InputField label="Maximum" type="number" name="max" value={salary.max} placeholder="120000"
               onChange={(e) => setSalary({ ...salary, max: e.target.value })} />
           </div>
         </div>
 
         {/* ─ Save ─ */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <Button type="submit" variant="primary" size="lg" disabled={loading}>
+        <div className="flex items-center gap-4">
+          <button type="submit" disabled={loading} className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm shadow-blue-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed">
             {loading ? "Saving…" : "Save Profile"}
-          </Button>
-          {saved && <span style={{ fontSize: "0.88rem", color: "var(--clr-success)", fontWeight: 600 }}>✓ Saved</span>}
+          </button>
+          {saved && <span className="text-sm text-emerald-600 font-bold bg-emerald-50 px-3 py-1.5 rounded-md">✓ Saved successfully</span>}
         </div>
       </form>
     </div>

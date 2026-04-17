@@ -41,43 +41,43 @@ const Register = () => {
   };
 
   return (
-    <div className="page-enter" style={{ maxWidth: 480, margin: "2.5rem auto", padding: "0 1.25rem" }}>
-      <div className="card" style={{ padding: "2.2rem 2rem" }}>
-        <div style={{ textAlign: "center", marginBottom: "1.8rem" }}>
-          <h1 style={{ fontSize: "1.6rem", marginBottom: "0.3rem" }}>Create account</h1>
-          <p style={{ color: "var(--clr-text-muted)", fontSize: "0.9rem" }}>Start discovering your ideal career path</p>
+    <div className="page-enter max-w-[480px] mx-auto my-10 px-5">
+      <div className="bg-white rounded-2xl shadow-md border border-slate-100 p-8 md:p-10">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-extrabold text-slate-800 mb-1 tracking-tight">Create account</h1>
+          <p className="text-sm font-medium text-slate-500">Start discovering your ideal career path</p>
         </div>
 
         {apiError && (
-          <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "var(--radius-sm)", padding: "0.6rem 0.8rem", marginBottom: "1rem", fontSize: "0.85rem", color: "var(--clr-danger)" }}>
+          <div className="bg-red-50 border border-red-200 text-red-600 rounded-lg px-4 py-3 mb-5 text-sm font-medium">
             {apiError}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-          <InputField label="Full Name" name="name" value={form.name} placeholder="" required error={errors.name}
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <InputField label="Full Name" name="name" value={form.name} placeholder="John Doe" required error={errors.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })} />
 
           <InputField label="Email" type="email" name="email" value={form.email} placeholder="you@example.com" required error={errors.email}
             onChange={(e) => setForm({ ...form, email: e.target.value })} />
 
-          <InputField label="Password" type="password" name="password" value={form.password} placeholder="password" required error={errors.password}
+          <InputField label="Password" type="password" name="password" value={form.password} placeholder="••••••••" required error={errors.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })} />
 
-          <InputField label="Confirm Password" type="password" name="confirmPassword" value={form.confirmPassword} placeholder="password" required error={errors.confirmPassword}
+          <InputField label="Confirm Password" type="password" name="confirmPassword" value={form.confirmPassword} placeholder="••••••••" required error={errors.confirmPassword}
             onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })} />
 
           {/* Role selector — in production this would be admin-invite-only */}
           <InputField label="Role" type="select" name="role" value={form.role} options={[{ value: "user", label: "User" }, { value: "admin", label: "Admin" }]}
             onChange={(e) => setForm({ ...form, role: e.target.value })} />
 
-          <Button type="submit" variant="primary" disabled={loading} style={{ marginTop: "0.4rem" }}>
+          <button type="submit" disabled={loading} className="mt-2 w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-sm shadow-blue-200 transition-all disabled:opacity-70 disabled:cursor-not-allowed">
             {loading ? "Creating…" : "Sign Up"}
-          </Button>
+          </button>
         </form>
 
-        <p style={{ textAlign: "center", marginTop: "1.4rem", fontSize: "0.85rem", color: "var(--clr-text-muted)" }}>
-          Already have an account? <Link to="/login" style={{ color: "var(--clr-primary)", textDecoration: "none", fontWeight: 600 }}>Sign in</Link>
+        <p className="text-center mt-6 text-sm font-medium text-slate-500">
+          Already have an account? <Link to="/login" className="font-bold text-blue-600 hover:text-blue-700 transition-colors">Sign in</Link>
         </p>
       </div>
     </div>

@@ -32,38 +32,27 @@ const Dashboard = () => {
     fetch();
   }, [tab, profileComplete]);
 
-  const tabStyle = (active) => ({
-    padding: "0.6rem 1.3rem",
-    border: "none",
-    background: active ? "var(--clr-primary)" : "transparent",
-    color: active ? "#fff" : "var(--clr-text-muted)",
-    fontFamily: "var(--font-display)",
-    fontWeight: 600,
-    fontSize: "0.88rem",
-    borderRadius: "var(--radius-sm)",
-    cursor: "pointer",
-    transition: "background var(--transition), color var(--transition)",
-  });
+  const tabStyle = (active) => `px-6 py-2.5 font-semibold text-sm rounded-lg transition-all ${active ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-100'}`;
 
   return (
-    <div className="container page-enter">
+    <div className="max-w-6xl mx-auto px-6 page-enter pb-16 font-sans">
       {/* ─── Welcome ─── */}
-      <div className="card" style={{ padding: "1.4rem 1.6rem", marginBottom: "1.5rem", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.6rem" }}>
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8 mb-8 flex justify-between items-center flex-wrap gap-4">
         <div>
-          <h1 style={{ fontSize: "1.4rem", margin: 0 }}>👋 Hello, {user?.name}</h1>
-          <p style={{ color: "var(--clr-text-muted)", fontSize: "0.88rem", margin: "0.2rem 0 0" }}>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 m-0">👋 Hello, {user?.name}</h1>
+          <p className="text-slate-500 font-medium mt-2">
             {profileComplete ? "Your profile is set up — check your recommendations!" : "Complete your profile to unlock personalised recommendations."}
           </p>
         </div>
-        <span style={{ fontSize: "0.78rem", background: user?.role === "admin" ? "rgba(0,201,167,0.1)" : "rgba(108,99,255,0.1)", color: user?.role === "admin" ? "var(--clr-accent)" : "var(--clr-primary)", fontWeight: 700, padding: "0.25rem 0.7rem", borderRadius: "99px" }}>
+        <span className={`text-xs font-bold px-4 py-1.5 rounded-full ${user?.role === "admin" ? "bg-emerald-100 text-emerald-700" : "bg-blue-100 text-blue-700"}`}>
           {user?.role === "admin" ? "Admin" : "User"}
         </span>
       </div>
 
       {/* ─── Tabs ─── */}
-      <div style={{ display: "flex", gap: "0.5rem", marginBottom: "1.5rem", background: "var(--clr-bg)", padding: "0.35rem", borderRadius: "var(--radius-sm)", width: "fit-content" }}>
-        <button style={tabStyle(tab === "profile")} onClick={() => setTab("profile")}>📝 Profile</button>
-        <button style={tabStyle(tab === "recs")} onClick={() => setTab("recs")}>🚀 Recommendations</button>
+      <div className="flex gap-2 mb-8 bg-white p-1.5 rounded-xl border border-slate-100 w-fit shadow-sm">
+        <button className={tabStyle(tab === "profile")} onClick={() => setTab("profile")}>📝 Profile</button>
+        <button className={tabStyle(tab === "recs")} onClick={() => setTab("recs")}>🚀 Recommendations</button>
       </div>
 
       {/* ─── Profile Tab ─── */}
@@ -71,9 +60,9 @@ const Dashboard = () => {
 
       {/* ─── Recommendations Tab ─── */}
       {tab === "recs" && (
-        <div>
+        <div className="animate-in fade-in duration-300">
           {!profileComplete && (
-            <div style={{ background: "#fefce8", border: "1px solid #fde047", borderRadius: "var(--radius-sm)", padding: "1rem 1.2rem", marginBottom: "1.2rem", fontSize: "0.88rem" }}>
+            <div className="bg-amber-50 border border-amber-200 text-amber-800 rounded-xl p-5 mb-6 text-sm font-medium">
               ⚠️ Add at least one <strong>skill</strong> or <strong>interest</strong> in your profile to see recommendations.
             </div>
           )}
@@ -81,19 +70,21 @@ const Dashboard = () => {
           {recsLoading && <Loader message="Calculating your matches…" />}
 
           {recsError && (
-            <div style={{ background: "#fef2f2", border: "1px solid #fecaca", borderRadius: "var(--radius-sm)", padding: "0.7rem 1rem", fontSize: "0.87rem", color: "var(--clr-danger)" }}>
+            <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl p-5 text-sm font-medium mb-6">
               {recsError}
             </div>
           )}
 
           {!recsLoading && !recsError && recs.length > 0 && (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.1rem" }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {recs.map((c) => <CareerCard key={c._id} career={c} />)}
             </div>
           )}
 
           {!recsLoading && !recsError && recs.length === 0 && profileComplete && (
-            <p style={{ color: "var(--clr-text-muted)", textAlign: "center", padding: "2rem" }}>No matching careers found. Try adding more skills or interests.</p>
+            <div className="bg-white rounded-2xl border border-slate-100 p-12 text-center text-slate-500 font-medium shadow-sm">
+              No matching careers found. Try adding more skills or interests.
+            </div>
           )}
         </div>
       )}

@@ -12,67 +12,57 @@ const Navbar = () => {
   };
 
   return (
-    <nav style={{ background: "var(--clr-surface)", borderBottom: "1px solid var(--clr-border)", position: "sticky", top: 0, zIndex: 100 }}>
-      <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0.9rem 1.25rem" }}>
+    <nav className="bg-white border-b border-slate-100 sticky top-0 z-50 shadow-sm font-sans backdrop-blur-md bg-white/90">
+      <div className="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
-        <Link to="/" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none", color: "var(--clr-text)" }}>
-          <div style={{ width: 36, height: 36, borderRadius: "8px", background: "linear-gradient(135deg, var(--clr-primary), var(--clr-accent))", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, color: "#fff", fontSize: "1.2rem" }}>
+        <Link to="/" className="flex items-center gap-3 no-underline text-slate-900 group">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-violet-600 flex items-center justify-center font-bold text-white text-lg shadow-md group-hover:shadow-blue-500/30 transition-all">
             C
           </div>
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.15rem" }}>CareerPath</span>
+          <span className="font-extrabold text-xl tracking-tight">CareerPath</span>
         </Link>
 
         {/* Nav Links */}
-        <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
-          <Link to="/" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--clr-text)", textDecoration: "none", transition: "color var(--transition)" }}
-            onMouseEnter={(e) => { e.target.style.color = "var(--clr-primary)"; }}
-            onMouseLeave={(e) => { e.target.style.color = "var(--clr-text)"; }}
-          >
+        <div className="flex items-center gap-8">
+          <Link to="/" className="text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors">
             Home
           </Link>
 
-          <Link to="/careers" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--clr-text)", textDecoration: "none", transition: "color var(--transition)" }}
-            onMouseEnter={(e) => { e.target.style.color = "var(--clr-primary)"; }}
-            onMouseLeave={(e) => { e.target.style.color = "var(--clr-text)"; }}
-          >
+          <Link to="/careers" className="text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors">
             Careers
           </Link>
 
-          <Link to="/forum" style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.9rem", fontWeight: 500, color: "var(--clr-text)", textDecoration: "none", transition: "color var(--transition)" }}
-            onMouseEnter={(e) => { e.target.style.color = "var(--clr-primary)"; }}
-            onMouseLeave={(e) => { e.target.style.color = "var(--clr-text)"; }}
-          >
+          <Link to="/forum" className="flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-blue-600 transition-colors">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
             </svg>
             Forum
           </Link>
 
+          <div className="h-6 w-px bg-slate-200 mx-2"></div>
+
           {user ? (
             <>
-              <Link to="/dashboard" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--clr-text)", textDecoration: "none", transition: "color var(--transition)" }}
-                onMouseEnter={(e) => { e.target.style.color = "var(--clr-primary)"; }}
-                onMouseLeave={(e) => { e.target.style.color = "var(--clr-text)"; }}
-              >
+              <Link to="/dashboard" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">
                 Dashboard
               </Link>
 
               {user.role === "admin" && (
-                <Link to="/admin" style={{ fontSize: "0.9rem", fontWeight: 500, color: "var(--clr-accent)", textDecoration: "none" }}>
+                <Link to="/admin" className="text-sm font-bold text-emerald-600 hover:text-emerald-700 transition-colors">
                   Admin
                 </Link>
               )}
 
-              <button onClick={handleLogout} className="btn btn-outline" style={{ padding: "0.5rem 1.1rem", fontSize: "0.85rem" }}>
+              <button onClick={handleLogout} className="px-5 py-2.5 text-sm font-bold text-slate-600 border border-slate-200 hover:bg-slate-50 rounded-lg transition-colors cursor-pointer">
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="btn btn-outline" style={{ padding: "0.5rem 1.1rem", fontSize: "0.85rem" }}>
+              <Link to="/login" className="text-sm font-bold text-slate-600 hover:text-slate-900 transition-colors">
                 Log In
               </Link>
-              <Link to="/register" className="btn btn-primary" style={{ padding: "0.5rem 1.1rem", fontSize: "0.85rem" }}>
+              <Link to="/register" className="px-5 py-2.5 text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-sm shadow-blue-200 transition-all hover:-translate-y-0.5">
                 Sign Up
               </Link>
             </>
