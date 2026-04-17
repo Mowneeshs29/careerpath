@@ -16,26 +16,25 @@ const PORT = process.env.PORT || 5000;
 
 /* ─── Middleware ─── */
 const corsOrigins = [
-  "http://localhost:5173", // Local dev
-  "http://localhost:3000",  // Alternative local
-  process.env.FRONTEND_URL, // Production frontend URL
+  "http://localhost:5173",
+  "http://127.0.0.1:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  process.env.FRONTEND_URL,
 ].filter(Boolean);
 
-// Allow the frontend origin (or any origin in production) to avoid CORS failures.
-// In production, `FRONTEND_URL` should be set to your deployed frontend URL.
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow non-browser requests (e.g., Postman) or same-origin
+      // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
 
-      if (corsOrigins.includes(origin)) {
+      if (corsOrigins.includes(origin) || process.env.NODE_ENV === "development") {
         return callback(null, true);
+      } else {
+        console.warn(`[CORS] Request from blocked origin: ${origin}`);
+        return callback(new Error("Not allowed by CORS"), false);
       }
-
-      // Use this for debugging: log blocked origins
-      console.warn("Blocked CORS request from:", origin);
-      return callback(new Error("Not allowed by CORS"), false);
     },
     credentials: true,
   })
