@@ -46,48 +46,57 @@ const Careers = () => {
   };
 
   return (
-    <div className="container page-enter">
+    <div className="max-w-7xl mx-auto px-6 py-12 page-enter">
       {/* Header */}
-      <div style={{ marginBottom: "1.5rem" }}>
-        <h1 style={{ fontSize: "1.7rem", margin: "0 0 0.3rem" }}>🗂️ All Careers</h1>
-        <p style={{ color: "var(--clr-text-muted)", fontSize: "0.9rem", margin: 0 }}>Browse and search our career catalog</p>
+      <div className="mb-10 relative">
+        <div className="absolute -inset-4 bg-gradient-to-r from-blue-100 to-violet-100 blur-2xl opacity-40 rounded-3xl -z-10"></div>
+        <h1 className="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight mb-3 flex items-center gap-3">
+          <span className="text-5xl tracking-normal">🔭</span> Discover Careers
+        </h1>
+        <p className="text-lg font-medium text-slate-500 max-w-xl">
+          Browse our extensive catalog of roles, uncover the skills you need, and find your next big opportunity.
+        </p>
       </div>
 
       {/* Search */}
-      <div style={{ marginBottom: "1.5rem" }}>
-        <SearchBar categories={categories} onChange={handleFilterChange} />
-      </div>
+      <SearchBar categories={categories} onChange={handleFilterChange} />
 
       {/* Results count */}
       {!loading && (
-        <p style={{ fontSize: "0.83rem", color: "var(--clr-text-muted)", marginBottom: "0.8rem" }}>
-          {meta.total || 0} career{meta.total !== 1 ? "s" : ""} found
-        </p>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="h-px bg-slate-200 flex-1"></div>
+          <p className="text-sm font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100 shadow-sm">
+            {meta.total || 0} career{meta.total !== 1 ? "s" : ""} found
+          </p>
+          <div className="h-px bg-slate-200 flex-1"></div>
+        </div>
       )}
 
       {/* Grid */}
       {loading ? (
-        <Loader />
+        <div className="py-20 flex justify-center"><Loader /></div>
       ) : careers.length ? (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.1rem" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {careers.map((c) => <CareerCard key={c._id} career={c} />)}
         </div>
       ) : (
-        <div style={{ textAlign: "center", padding: "3rem 1rem", color: "var(--clr-text-muted)" }}>
-          No careers match your search. Try different keywords or clear the filter.
+        <div className="text-center py-20 bg-white rounded-3xl border border-slate-100 border-dashed">
+          <div className="text-4xl mb-4">🌪️</div>
+          <h3 className="text-xl font-bold text-slate-700 mb-2">No careers match your search</h3>
+          <p className="text-slate-500">Try adjusting your keywords or clearing the category filter.</p>
         </div>
       )}
 
       {/* Pagination */}
       {meta.pages > 1 && (
-        <div style={{ display: "flex", justifyContent: "center", gap: "0.4rem", marginTop: "2rem", flexWrap: "wrap" }}>
+        <div className="flex justify-center items-center gap-2 mt-12 flex-wrap">
           {Array.from({ length: meta.pages }, (_, i) => i + 1).map((p) => (
-            <button key={p} onClick={() => goToPage(p)} style={{
-              width: 36, height: 36, borderRadius: "var(--radius-sm)", border: "1.5px solid var(--clr-border)",
-              background: p === page ? "var(--clr-primary)" : "var(--clr-surface)",
-              color: p === page ? "#fff" : "var(--clr-text)",
-              fontWeight: 600, cursor: "pointer", fontSize: "0.85rem",
-            }}>
+            <button key={p} onClick={() => goToPage(p)} className={`
+              w-10 h-10 rounded-xl font-bold text-sm transition-all flex items-center justify-center
+              ${p === page 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/30 -translate-y-0.5" 
+                : "bg-white text-slate-600 border border-slate-200 hover:border-blue-300 hover:text-blue-600 hover:-translate-y-0.5 shadow-sm"}
+            `}>
               {p}
             </button>
           ))}
