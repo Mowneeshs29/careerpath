@@ -61,6 +61,36 @@ exports.login = async (req, res, next) => {
   }
 };
 
+/* ─── POST /api/auth/google ─── */
+exports.googleLogin = async (req, res, next) => {
+  try {
+    const { name, email, googleId } = req.body;
+    if (!email) return res.status(400).json({ message: "Email is required from Google Auth" });
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      // Create user if they don't exist
+      const randomPassword = await bcrypt.hash(Math.random().toString(36).slice(-8), 12);
+      user = await User.create({
+        name: name || "Google User",
+        email,
+        password: randomPassword, // generic fallback
+        role: "user"
+      });
+    }
+
+    const token = generateToken(user._id, user.role);
+
+    res.status(user.isNew ? 201 : 200).json({
+      token,
+      user: { id: user._id, name: user.name, email: user.email, role: user.role },
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 /* ─── GET /api/auth/me  (protected) ─── */
 exports.getMe = async (req, res) => {
   // req.user already populated by verifyToken middleware
