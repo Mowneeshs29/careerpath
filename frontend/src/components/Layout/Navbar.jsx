@@ -61,8 +61,11 @@ const Navbar = () => {
                 </Link>
               )}
 
-              <button onClick={handleLogout} className="px-5 py-2.5 text-sm font-bold text-slate-600 bg-white border border-slate-200 hover:border-red-200 hover:bg-red-50 hover:text-red-600 rounded-xl transition-all shadow-sm cursor-pointer">
-                Logout
+              <button 
+                onClick={handleLogout} 
+                className="px-5 py-2.5 text-sm font-bold text-rose-600 bg-rose-50/50 hover:bg-rose-50 border border-rose-100 hover:border-rose-200 rounded-xl transition-all shadow-sm hover:shadow-md cursor-pointer flex items-center gap-2"
+              >
+                <span className="text-sm opacity-80">Logout</span>
               </button>
             </div>
           ) : (
