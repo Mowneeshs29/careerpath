@@ -15,6 +15,7 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Careers", path: "/careers" },
+    { name: "Forum", path: "/forum" },
   ];
 
   return (
@@ -32,30 +33,18 @@ const Navbar = () => {
         {/* Nav Links */}
         <div className="flex items-center gap-8">
           {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
+            const isActive = location.pathname === link.path || (link.path !== '/' && location.pathname.startsWith(link.path));
             return (
               <Link 
                 key={link.name} 
                 to={link.path} 
-                className={`text-sm font-bold transition-all relative ${isActive ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
+                className={`text-sm font-bold transition-all relative py-1 flex flex-col justify-center ${isActive ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}
               >
                 {link.name}
-                {isActive && (
-                  <span className="absolute -bottom-1.5 left-0 w-full h-0.5 bg-blue-600 rounded-full shadow-[0_0_8px_rgba(37,99,235,0.6)]"></span>
-                )}
+                <span className={`absolute -bottom-1.5 left-0 w-full h-0.5 bg-blue-600 rounded-full shadow-[0_0_8px_rgba(37,99,235,0.6)] transform origin-left transition-transform duration-300 ${isActive ? "scale-x-100" : "scale-x-0 hover:scale-x-50"}`}></span>
               </Link>
             );
           })}
-
-          <Link to="/forum" className={`flex items-center gap-1.5 text-sm font-bold transition-all relative ${location.pathname.startsWith('/forum') ? "text-blue-600" : "text-slate-500 hover:text-slate-900"}`}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="opacity-80">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-            Forum
-            {location.pathname.startsWith('/forum') && (
-              <span className="absolute -bottom-1.5 left-0 w-full h-0.5 bg-blue-600 rounded-full shadow-[0_0_8px_rgba(37,99,235,0.6)]"></span>
-            )}
-          </Link>
 
           <div className="h-8 w-px bg-slate-200/80 mx-2 rounded-full"></div>
 
