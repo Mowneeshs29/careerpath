@@ -4,6 +4,13 @@
   :root {
     --font-display: 'Inter', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
+
+    /* Semantic Colors */
+    --clr-success: #10b981; /* Emerald 500 */
+    --clr-warning: #f59e0b; /* Amber 500 */
+    --clr-danger: #ef4444;  /* Red 500 */
+    --clr-primary: #4f46e5; /* Indigo 600 */
+    --clr-primary-glow: rgba(79, 70, 229, 0.15);
   }
 
   body {
