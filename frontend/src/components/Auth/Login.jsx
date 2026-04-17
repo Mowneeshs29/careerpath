@@ -4,7 +4,7 @@ import { useAuth } from "../../hooks/useAuth";
 import InputField from "../Shared/InputField";
 
 const Login = () => {
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
   const nav = useNavigate();
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
@@ -36,8 +36,17 @@ const Login = () => {
     }
   };
 
-  const handleGoogleAuth = () => {
-    alert("Google authentication is currently in development! (Backend Firebase integration required)");
+  const handleGoogleAuth = async () => {
+    try {
+      setLoading(true);
+      setApiError("");
+      await loginWithGoogle();
+      nav("/dashboard");
+    } catch (err) {
+      setApiError(err?.message || "Google authentication failed. Have you configured your Firebase credentials in src/config/firebase.js?");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

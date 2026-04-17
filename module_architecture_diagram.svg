@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="1100" height="800">
+    <!-- Professional Layered Module Architecture Diagram -->
+    <defs>
+        <!-- Elegant Drop Shadow -->
+        <filter id="shadow" x="-5%" y="-5%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.1" />
+        </filter>
+        
+        <!-- Arrowhead for Directed Flow -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+        </marker>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1100" height="800" fill="#f8fafc"/>
+
+    <!-- ARCHITECTURE LAYERS -->
+    <g font-family="system-ui, -apple-system, sans-serif">
+        <!-- 1. Presentation Layer -->
+        <rect x="50" y="120" width="1000" height="160" fill="#eff6ff" stroke="#93c5fd" stroke-width="2" stroke-dasharray="8,4" rx="8" />
+        <text x="70" y="150" font-size="18" font-weight="700" fill="#2563eb">1. Presentation &amp; UI Layer</text>
+
+        <!-- 2. Core Application Layer -->
+        <rect x="50" y="320" width="1000" height="200" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="2" stroke-dasharray="8,4" rx="8" />
+        <text x="70" y="350" font-size="18" font-weight="700" fill="#7c3aed">2. Core Application Logic Layer</text>
+
+        <!-- 3. Data Integration Layer -->
+        <rect x="50" y="560" width="1000" height="160" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="2" stroke-dasharray="8,4" rx="8" />
+        <text x="70" y="590" font-size="18" font-weight="700" fill="#059669">3. Data Integration &amp; Pipeline Layer</text>
+    </g>
+
+
+    <!-- COMMUNICATION HIGHWAYS (Arrows) -->
+    <g fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)">
+        
+        <!-- Between L1 and L2 -->
+        <!-- Left -->
+        <path d="M 230 265 L 230 370" />
+        <path d="M 250 370 L 250 265" />
+        <!-- Center -->
+        <path d="M 540 265 L 540 370" />
+        <path d="M 560 370 L 560 265" />
+        <!-- Right -->
+        <path d="M 850 265 L 850 370" />
+        <path d="M 870 370 L 870 265" />
+
+        <!-- Between L2 and L3 -->
+        <!-- Left -->
+        <path d="M 230 500 L 230 605" />
+        <path d="M 250 605 L 250 500" />
+        <!-- Center -->
+        <path d="M 540 500 L 540 605" />
+        <path d="M 560 605 L 560 500" />
+        <!-- Right -->
+        <path d="M 850 500 L 850 605" />
+        <path d="M 870 605 L 870 500" />
+    </g>
+
+    <!-- Communication Labels -->
+    <g font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#64748b">
+        <!-- L1 <-> L2 Labels -->
+        <text x="220" y="322" text-anchor="end">Auth State</text>
+        <text x="260" y="322" text-anchor="start">Valid Token</text>
+        
+        <text x="530" y="322" text-anchor="end">Rec Queries</text>
+        <text x="570" y="322" text-anchor="start">Job Matches</text>
+        
+        <text x="840" y="322" text-anchor="end">Search Inputs</text>
+        <text x="880" y="322" text-anchor="start">Skill Graphs</text>
+
+        <!-- L2 <-> L3 Labels -->
+        <text x="220" y="557" text-anchor="end">Profile Write</text>
+        <text x="260" y="557" text-anchor="start">User Data</text>
+        
+        <text x="530" y="557" text-anchor="end">Fetch Vectors</text>
+        <text x="570" y="557" text-anchor="start">Models/Data</text>
+        
+        <text x="840" y="557" text-anchor="end">Trigger Scrape</text>
+        <text x="880" y="557" text-anchor="start">Market Data</text>
+    </g>
+
+
+    <!-- MODULE BLOCKS -->
+    <g font-family="system-ui, -apple-system, sans-serif">
+        
+        <!-- LAYER 1 (Presentation) -->
+        <g transform="translate(120, 175)" filter="url(#shadow)">
+            <rect width="240" height="80" rx="6" fill="#2563eb" />
+            <text x="120" y="36" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Auth &amp; Session Layer</text>
+            <text x="120" y="58" font-size="13" font-weight="500" text-anchor="middle" fill="#bfdbfe">Security &amp; JWT Tokens</text>
+        </g>
+        <g transform="translate(430, 175)" filter="url(#shadow)">
+            <rect width="240" height="80" rx="6" fill="#2563eb" />
+            <text x="120" y="36" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Main User Dashboard</text>
+            <text x="120" y="58" font-size="13" font-weight="500" text-anchor="middle" fill="#bfdbfe">Rendered Result Display</text>
+        </g>
+        <g transform="translate(740, 175)" filter="url(#shadow)">
+            <rect width="240" height="80" rx="6" fill="#2563eb" />
+            <text x="120" y="36" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Career Explorer UI</text>
+            <text x="120" y="58" font-size="13" font-weight="500" text-anchor="middle" fill="#bfdbfe">Interactive Search Tools</text>
+        </g>
+
+        <!-- LAYER 2 (Core Application) -->
+        <g transform="translate(120, 380)" filter="url(#shadow)">
+            <rect width="240" height="110" rx="6" fill="#7c3aed" />
+            <text x="120" y="40" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Profile Processing</text>
+            <text x="120" y="65" font-size="13" font-weight="500" text-anchor="middle" fill="#ede9fe">User History Tracking</text>
+            <text x="120" y="85" font-size="13" font-weight="500" text-anchor="middle" fill="#ede9fe">Resume Data Parsing</text>
+        </g>
+        <g transform="translate(430, 380)" filter="url(#shadow)">
+            <rect width="240" height="110" rx="6" fill="#7c3aed" />
+            <text x="120" y="40" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Recommendation Engine</text>
+            <text x="120" y="65" font-size="13" font-weight="500" text-anchor="middle" fill="#ede9fe">Cosine Similarity Matching</text>
+            <text x="120" y="85" font-size="13" font-weight="500" text-anchor="middle" fill="#ede9fe">Skill Gap Analysis</text>
+        </g>
+        <g transform="translate(740, 380)" filter="url(#shadow)">
+            <rect width="240" height="110" rx="6" fill="#7c3aed" />
+            <text x="120" y="40" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Core NLP Pipeline</text>
+            <text x="120" y="65" font-size="13" font-weight="500" text-anchor="middle" fill="#ede9fe">Ontology &amp; Normalization</text>
+            <text x="120" y="85" font-size="13" font-weight="500" text-anchor="middle" fill="#ede9fe">Keyword Extraction</text>
+        </g>
+
+        <!-- LAYER 3 (Data Integration) -->
+        <g transform="translate(120, 615)" filter="url(#shadow)">
+            <rect width="240" height="80" rx="6" fill="#059669" />
+            <text x="120" y="36" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">External API Integration</text>
+            <text x="120" y="58" font-size="13" font-weight="500" text-anchor="middle" fill="#a7f3d0">3rd-Party Job Board Sockets</text>
+        </g>
+        <g transform="translate(430, 615)" filter="url(#shadow)">
+            <rect width="240" height="80" rx="6" fill="#059669" />
+            <text x="120" y="36" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Data Persistence Core</text>
+            <text x="120" y="58" font-size="13" font-weight="500" text-anchor="middle" fill="#a7f3d0">Postgres ORM &amp; Firebase</text>
+        </g>
+        <g transform="translate(740, 615)" filter="url(#shadow)">
+            <rect width="240" height="80" rx="6" fill="#059669" />
+            <text x="120" y="36" font-size="18" font-weight="700" text-anchor="middle" fill="#ffffff">Market Web Scraper</text>
+            <text x="120" y="58" font-size="13" font-weight="500" text-anchor="middle" fill="#a7f3d0">Real-time Data Collectors</text>
+        </g>
+
+    </g>
+
+</svg>

@@ -63,6 +63,39 @@ export const AuthProvider = ({ children }) => {
     setProfile(null);
   };
 
+  /* ─── Google Login ─── */
+  const loginWithGoogle = async () => {
+    setError(null);
+    try {
+      const { auth, googleProvider } = await import("../config/firebase");
+      const { signInWithPopup } = await import("firebase/auth");
+      
+      const result = await signInWithPopup(auth, googleProvider);
+      const fbUser = result.user;
+      
+      // Dispatch to backend to create user or get JWT
+      const { data } = await authAPI.google({
+        name: fbUser.displayName,
+        email: fbUser.email,
+        googleId: fbUser.uid
+      });
+
+      sessionStorage.setItem("crr_token", data.token);
+      setToken(data.token);
+      setUser(data.user);
+      
+      try {
+        const { data: pData } = await profileAPI.get();
+        setProfile(pData.profile);
+      } catch { /* ignore */ }
+      
+      return data;
+    } catch (err) {
+      setError(err?.response?.data?.message || err.message || "Google Login failed");
+      throw err;
+    }
+  };
+
   /* ─── Update Profile (local + remote) ─── */
   const updateProfile = async (payload) => {
     const { data } = await profileAPI.update(payload);
@@ -70,7 +103,7 @@ export const AuthProvider = ({ children }) => {
     return data.profile;
   };
 
-  const value = { user, profile, loading, error, setError, register, login, logout, updateProfile };
+  const value = { user, profile, loading, error, setError, register, login, logout, loginWithGoogle, updateProfile };
 
   return (
     <AuthContext.Provider value={value}>

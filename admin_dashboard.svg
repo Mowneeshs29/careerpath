@@ -1,0 +1,225 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="1100" height="800">
+    <!-- Professional Admin Dashboard Analytics View -->
+    <defs>
+        <!-- Soft Dashboard Drop Shadow -->
+        <filter id="shadow-light" x="-2%" y="-2%" width="104%" height="106%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.06" />
+        </filter>
+        
+        <!-- Gradient for Area Chart -->
+        <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.25" />
+            <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.01" />
+        </linearGradient>
+    </defs>
+
+    <!-- Canvas Background -->
+    <rect width="1100" height="800" fill="#f1f5f9"/>
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <rect x="0" y="0" width="220" height="800" fill="#0f172a" />
+    
+    <!-- Branding -->
+    <circle cx="35" cy="40" r="12" fill="#3b82f6" />
+    <circle cx="45" cy="40" r="12" fill="#8b5cf6" opacity="0.8" />
+    <text x="65" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="#ffffff">CareerAdmin</text>
+
+    <!-- Menu Items -->
+    <!-- Dashboard (Active) -->
+    <rect x="15" y="80" width="190" height="40" rx="8" fill="#2563eb" />
+    <text x="45" y="105" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#ffffff">Analytics Dashboard</text>
+    
+    <!-- Other Menu Items -->
+    <text x="45" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#94a3b8">User Management</text>
+    <text x="45" y="205" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#94a3b8">Career Database</text>
+    <text x="45" y="255" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#94a3b8">Recommendation Logs</text>
+    <text x="45" y="305" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#94a3b8">API Integrations</text>
+    
+    <!-- Bottom Setting Menu -->
+    <text x="45" y="755" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="500" fill="#94a3b8">System Settings</text>
+
+
+    <!-- ==================== HEADER ==================== -->
+    <rect x="220" y="0" width="880" height="70" fill="#ffffff" filter="url(#shadow-light)" />
+    <!-- Hamburger icon lines -->
+    <line x1="250" y1="28" x2="270" y2="28" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+    <line x1="250" y1="35" x2="270" y2="35" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+    <line x1="250" y1="42" x2="270" y2="42" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+    
+    <text x="290" y="42" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#1e293b">Platform Overview</text>
+    
+    <!-- User Avatar Profile -->
+    <rect x="1030" y="15" width="40" height="40" rx="20" fill="#e2e8f0" />
+    <text x="1050" y="41" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" text-anchor="middle" fill="#475569">A</text>
+    <circle cx="1062" cy="46" r="5" fill="#10b981" stroke="#ffffff" stroke-width="2" />
+
+
+    <!-- ==================== KPI CARDS ==================== -->
+    <g font-family="system-ui, -apple-system, sans-serif">
+        <!-- Card 1 -->
+        <g transform="translate(250, 100)">
+            <rect width="190" height="110" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+            <text x="20" y="35" font-size="13" font-weight="600" fill="#64748b">Total Registered Users</text>
+            <text x="20" y="72" font-size="28" font-weight="800" fill="#1e293b">14,245</text>
+            <text x="20" y="94" font-size="12" font-weight="600" fill="#10b981">↑ +12.5% this month</text>
+        </g>
+        
+        <!-- Card 2 -->
+        <g transform="translate(460, 100)">
+            <rect width="190" height="110" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+            <text x="20" y="35" font-size="13" font-weight="600" fill="#64748b">Active Careers Tracked</text>
+            <text x="20" y="72" font-size="28" font-weight="800" fill="#1e293b">1,048</text>
+            <text x="20" y="94" font-size="12" font-weight="600" fill="#10b981">↑ +45 imported today</text>
+        </g>
+
+        <!-- Card 3 -->
+        <g transform="translate(670, 100)">
+            <rect width="190" height="110" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+            <text x="20" y="35" font-size="13" font-weight="600" fill="#64748b">Total Matches Made</text>
+            <text x="20" y="72" font-size="28" font-weight="800" fill="#1e293b">89.4k</text>
+            <text x="20" y="94" font-size="12" font-weight="600" fill="#10b981">↑ +2,140 this week</text>
+        </g>
+
+        <!-- Card 4 -->
+        <g transform="translate(880, 100)">
+            <rect width="190" height="110" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+            <text x="20" y="35" font-size="13" font-weight="600" fill="#64748b">ML Engine Status</text>
+            <text x="20" y="72" font-size="24" font-weight="800" fill="#10b981">Healthy</text>
+            <text x="20" y="94" font-size="12" font-weight="600" fill="#64748b">Sys Latency: 42ms</text>
+        </g>
+    </g>
+
+
+    <!-- ==================== MAIN CHARTS ==================== -->
+    <!-- User Growth Area Chart -->
+    <g transform="translate(250, 240)">
+        <rect width="520" height="300" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+        <text x="25" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#1e293b">User Growth &amp; Engagement</text>
+
+        <!-- Grid lines & Y-Axis Labels -->
+        <g font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">
+            <path d="M 40 90 L 490 90" stroke="#f1f5f9" stroke-width="2" />
+            <text x="35" y="94">4k</text>
+            
+            <path d="M 40 130 L 490 130" stroke="#f1f5f9" stroke-width="2" />
+            <text x="35" y="134">3k</text>
+            
+            <path d="M 40 170 L 490 170" stroke="#f1f5f9" stroke-width="2" />
+            <text x="35" y="174">2k</text>
+            
+            <path d="M 40 210 L 490 210" stroke="#f1f5f9" stroke-width="2" />
+            <text x="35" y="214">1k</text>
+            
+            <path d="M 40 250 L 490 250" stroke="#f1f5f9" stroke-width="2" />
+            <text x="35" y="254">0</text>
+        </g>
+        
+        <!-- Plotting Area -->
+        <g transform="translate(15, 0)">
+            <path d="M 40 250 L 85 235 L 130 190 L 175 205 L 220 150 L 265 130 L 310 90 L 355 120 L 400 80 L 445 40 L 445 250 L 40 250 Z" fill="url(#areaGradient)" />
+            <path d="M 40 250 L 85 235 L 130 190 L 175 205 L 220 150 L 265 130 L 310 90 L 355 120 L 400 80 L 445 40" fill="none" stroke="#2563eb" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            
+            <!-- Latest Highlight Point -->
+            <circle cx="445" cy="40" r="5" fill="#ffffff" stroke="#2563eb" stroke-width="3"/>
+            
+            <!-- X-axis labels -->
+            <g font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#64748b" text-anchor="middle">
+                <text x="40" y="275">Sep</text>
+                <text x="85" y="275">Oct</text>
+                <text x="130" y="275">Nov</text>
+                <text x="175" y="275">Dec</text>
+                <text x="220" y="275">Jan</text>
+                <text x="265" y="275">Feb</text>
+                <text x="310" y="275">Mar</text>
+                <text x="355" y="275">Apr</text>
+                <text x="400" y="275">May</text>
+                <text x="445" y="275" font-weight="700" fill="#2563eb">Jun</text>
+            </g>
+        </g>
+    </g>
+
+    <!-- Top Role Categories Donut Chart -->
+    <g transform="translate(790, 240)">
+        <rect width="280" height="300" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+        <text x="25" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#1e293b">Target Role Distribution</text>
+
+        <!-- Donut Vectors (r=50 -> circum=314.16) -->
+        <g transform="rotate(-90 140 135)">
+            <!-- Gray Track -->
+            <circle cx="140" cy="135" r="50" fill="none" stroke="#f1f5f9" stroke-width="26" />
+            <!-- Tech / Software (40%) -->
+            <circle cx="140" cy="135" r="50" fill="none" stroke="#2563eb" stroke-width="26" stroke-dasharray="125.6 314.2" stroke-dashoffset="0" />
+            <!-- Finance & Business (30%) -->
+            <circle cx="140" cy="135" r="50" fill="none" stroke="#8b5cf6" stroke-width="26" stroke-dasharray="94.2 314.2" stroke-dashoffset="-125.6" />
+            <!-- Healthcare (20%) -->
+            <circle cx="140" cy="135" r="50" fill="none" stroke="#10b981" stroke-width="26" stroke-dasharray="62.8 314.2" stroke-dashoffset="-219.8" />
+            <!-- Creative / Other (10%) -->
+            <circle cx="140" cy="135" r="50" fill="none" stroke="#f59e0b" stroke-width="26" stroke-dasharray="32.5 314.2" stroke-dashoffset="-282.6" />
+        </g>
+
+        <!-- Center Donut Text -->
+        <text x="140" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="800" text-anchor="middle" fill="#1e293b">100%</text>
+        <text x="140" y="150" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" text-anchor="middle" fill="#64748b">Analyzed</text>
+
+        <!-- Legends -->
+        <g font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="500" fill="#475569">
+            <rect x="35" y="225" width="10" height="10" rx="3" fill="#2563eb" />
+            <text x="55" y="234">Software/Tech</text>
+            
+            <rect x="155" y="225" width="10" height="10" rx="3" fill="#8b5cf6" />
+            <text x="175" y="234">Finance/Biz</text>
+
+            <rect x="35" y="255" width="10" height="10" rx="3" fill="#10b981" />
+            <text x="55" y="264">Healthcare</text>
+
+            <rect x="155" y="255" width="10" height="10" rx="3" fill="#f59e0b" />
+            <text x="175" y="264">Creative/Other</text>
+        </g>
+    </g>
+
+
+    <!-- ==================== RECENT ACTIVITY TABLE ==================== -->
+    <g transform="translate(250, 560)">
+        <rect width="820" height="220" rx="10" fill="#ffffff" filter="url(#shadow-light)" />
+        <text x="25" y="40" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#1e293b">Recent System Activity</text>
+
+        <g font-family="system-ui, -apple-system, sans-serif">
+            <!-- Header Background & Labels -->
+            <rect x="0" y="55" width="820" height="36" fill="#f8fafc" />
+            <line x1="0" y1="55" x2="820" y2="55" stroke="#e2e8f0" />
+            <line x1="0" y1="91" x2="820" y2="91" stroke="#e2e8f0" />
+            
+            <g font-size="12" font-weight="700" fill="#64748b" text-transform="uppercase">
+                <text x="25" y="78">Timestamp (GMT)</text>
+                <text x="180" y="78">Action</text>
+                <text x="350" y="78">Details</text>
+                <text x="700" y="78">Status</text>
+            </g>
+
+            <!-- Data Row 1 -->
+            <line x1="0" y1="131" x2="820" y2="131" stroke="#f1f5f9" />
+            <text x="25" y="117" font-size="13" font-weight="500" fill="#475569">2 mins ago</text>
+            <text x="180" y="117" font-size="13" font-weight="600" fill="#0f172a">Job API Sync</text>
+            <text x="350" y="117" font-size="13" fill="#64748b">Pulled 55 new Software Engineering roles externally</text>
+            <rect x="700" y="102" width="70" height="24" rx="4" fill="#d1fae5" />
+            <text x="735" y="118" font-size="11" font-weight="700" text-anchor="middle" fill="#059669">SUCCESS</text>
+
+            <!-- Data Row 2 -->
+            <line x1="0" y1="171" x2="820" y2="171" stroke="#f1f5f9" />
+            <text x="25" y="157" font-size="13" font-weight="500" fill="#475569">18 mins ago</text>
+            <text x="180" y="157" font-size="13" font-weight="600" fill="#0f172a">Model Retrain Tasks</text>
+            <text x="350" y="157" font-size="13" fill="#64748b">Updated Cosine Similarity matrices for Active Users</text>
+            <rect x="700" y="142" width="70" height="24" rx="4" fill="#d1fae5" />
+            <text x="735" y="158" font-size="11" font-weight="700" text-anchor="middle" fill="#059669">SUCCESS</text>
+
+            <!-- Data Row 3 -->
+            <line x1="0" y1="211" x2="820" y2="211" stroke="#f1f5f9" />
+            <text x="25" y="197" font-size="13" font-weight="500" fill="#475569">1 hr ago</text>
+            <text x="180" y="197" font-size="13" font-weight="600" fill="#0f172a">Database Backup</text>
+            <text x="350" y="197" font-size="13" fill="#64748b">Failed to upload user-profiles snapshot to isolated S3 Bucket</text>
+            <rect x="700" y="182" width="70" height="24" rx="4" fill="#fee2e2" />
+            <text x="735" y="198" font-size="11" font-weight="700" text-anchor="middle" fill="#dc2626">FAILED</text>
+        </g>
+    </g>
+
+</svg>

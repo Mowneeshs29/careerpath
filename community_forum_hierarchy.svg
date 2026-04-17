@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="1100" height="800">
+    <!-- Professional Community Forum Thread Hierarchy Diagram -->
+    <defs>
+        <!-- Elegant Drop Shadow -->
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12" />
+        </filter>
+        
+        <!-- Arrowhead for Hierarchy Flow -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+        </marker>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1100" height="800" fill="#f8fafc"/>
+
+    <!-- HIERARCHY LINES (Edges) -->
+    <g fill="none" stroke="#94a3b8" stroke-width="2.5" marker-end="url(#arrow)">
+        <!-- L1 to L2 (Root to Categories) -->
+        <path d="M 550 135 L 550 170 L 250 170 L 250 205" />
+        <path d="M 550 135 L 550 205" />
+        <path d="M 550 135 L 550 170 L 850 170 L 850 205" />
+
+        <!-- L2 to L3 (Category to Thread) -->
+        <path d="M 550 275 L 550 345" />
+
+        <!-- L3 to L4 (Thread to Direct Replies) -->
+        <path d="M 550 415 L 550 450 L 350 450 L 350 485" />
+        <path d="M 550 415 L 550 450 L 750 450 L 750 485" />
+
+        <!-- L4 to L5 (Replies to Nested Replies) -->
+        <path d="M 350 555 L 350 625" />
+        <path d="M 750 555 L 750 625" />
+    </g>
+
+
+    <!-- HIERARCHY NODES (Boxes) -->
+    <g font-family="system-ui, -apple-system, sans-serif">
+        
+        <!-- Level 1: Global Root -->
+        <g transform="translate(430, 65)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#0f172a" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Community Hub</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#94a3b8">Global Forum Root</text>
+        </g>
+
+        <!-- Level 2: Categories -->
+        <g transform="translate(130, 205)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#2563eb" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Career Discussions</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#bfdbfe">Forum Category</text>
+        </g>
+        <g transform="translate(430, 205)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#2563eb" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Skill Development</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#bfdbfe">Forum Category</text>
+        </g>
+        <g transform="translate(730, 205)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#2563eb" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Interview Prep</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#bfdbfe">Forum Category</text>
+        </g>
+
+        <!-- Level 3: Thread -->
+        <g transform="translate(430, 345)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#7c3aed" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Best React Resources?</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#ede9fe">Discussion Thread / Topic</text>
+        </g>
+
+        <!-- Level 4: Replies -->
+        <g transform="translate(230, 485)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#059669" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Check the official docs!</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#a7f3d0">Primary Reply (by Alice)</text>
+        </g>
+        <g transform="translate(630, 485)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#059669" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Codecademy is great.</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#a7f3d0">Primary Reply (by Bob)</text>
+        </g>
+
+        <!-- Level 5: Nested Replies -->
+        <g transform="translate(230, 625)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#0d9488" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Agree, mostly highly updated.</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#99f6e4">Nested Reply (by Charlie)</text>
+        </g>
+        <g transform="translate(630, 625)" filter="url(#shadow)">
+            <rect width="240" height="70" rx="8" fill="#0d9488" />
+            <text x="120" y="32" font-size="16" font-weight="700" text-anchor="middle" fill="#ffffff">Is it completely free?</text>
+            <text x="120" y="52" font-size="12" font-weight="500" text-anchor="middle" fill="#99f6e4">Nested Reply (by Dave)</text>
+        </g>
+
+    </g>
+
+    <!-- LEGEND BOX -->
+    <g transform="translate(880, 60)" font-family="system-ui, -apple-system, sans-serif" filter="url(#shadow)">
+        <rect width="180" height="210" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+        <text x="90" y="30" font-size="14" font-weight="700" text-anchor="middle" fill="#1e293b">Hierarchy Levels</text>
+        <line x1="20" y1="45" x2="160" y2="45" stroke="#e2e8f0" stroke-width="2"/>
+
+        <rect x="20" y="60" width="16" height="16" rx="4" fill="#0f172a"/>
+        <text x="48" y="73" font-size="13" font-weight="600" fill="#475569">1. Global Root</text>
+
+        <rect x="20" y="90" width="16" height="16" rx="4" fill="#2563eb"/>
+        <text x="48" y="103" font-size="13" font-weight="600" fill="#475569">2. Categories</text>
+
+        <rect x="20" y="120" width="16" height="16" rx="4" fill="#7c3aed"/>
+        <text x="48" y="133" font-size="13" font-weight="600" fill="#475569">3. Topics/Threads</text>
+
+        <rect x="20" y="150" width="16" height="16" rx="4" fill="#059669"/>
+        <text x="48" y="163" font-size="13" font-weight="600" fill="#475569">4. Direct Replies</text>
+
+        <rect x="20" y="180" width="16" height="16" rx="4" fill="#0d9488"/>
+        <text x="48" y="193" font-size="13" font-weight="600" fill="#475569">5. Nested Replies</text>
+    </g>
+
+</svg>

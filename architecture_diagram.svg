@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 700" width="1100" height="700">
+    <!-- Professional System Architecture Diagram -->
+    <defs>
+        <!-- Elegant Drop Shadow -->
+        <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+            <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.15" />
+        </filter>
+        
+        <!-- Arrowhead for path ends -->
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+        </marker>
+    </defs>
+
+    <!-- Background -->
+    <rect width="1100" height="700" fill="#f8fafc"/>
+
+    <!-- CONNECION LINES & LABELS -->
+    <g font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#475569">
+        
+        <!-- UI to Auth (Login) -->
+        <path d="M 200 280 L 200 150 L 415 150" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow)"/>
+        <text x="215" y="140">1. Login / Auth Request</text>
+
+        <!-- UI to Backend -->
+        <path d="M 320 330 L 415 330" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="367" y="320" text-anchor="middle">3. API Request</text>
+        
+        <!-- Backend to UI -->
+        <path d="M 430 350 L 335 350" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="382" y="375" text-anchor="middle">6. HTTP Response</text>
+
+        <!-- Backend to Auth -->
+        <path d="M 530 280 L 530 215" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="545" y="250">2. Verify Token</text>
+
+        <!-- Backend to DB -->
+        <path d="M 670 330 L 765 330" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="717" y="320" text-anchor="middle">4. Query Data</text>
+
+        <!-- DB to Backend -->
+        <path d="M 780 350 L 685 350" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="732" y="375" text-anchor="middle">Results</text>
+
+        <!-- Backend to ML -->
+        <path d="M 530 380 L 530 485" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="545" y="440">5. Request Recs</text>
+
+        <!-- ML to Backend -->
+        <path d="M 570 500 L 570 395" fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="585" y="455">Return Matches</text>
+    </g>
+
+
+    <!-- BOXES -->
+    <!-- Typography: White text for contrast on rich colors -->
+    <g font-family="system-ui, -apple-system, sans-serif">
+        
+        <!-- UI Box (Blue) -->
+        <g transform="translate(80, 280)" filter="url(#shadow)">
+            <rect width="240" height="100" rx="10" fill="#2563eb" />
+            <text x="120" y="45" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">Client Application</text>
+            <text x="120" y="70" font-size="14" font-weight="500" text-anchor="middle" fill="#bfdbfe">Web / Mobile Interface</text>
+        </g>
+
+        <!-- Auth Box (Amber) -->
+        <g transform="translate(430, 100)" filter="url(#shadow)">
+            <rect width="240" height="100" rx="10" fill="#f59e0b" />
+            <text x="120" y="45" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">Authentication</text>
+            <text x="120" y="70" font-size="14" font-weight="500" text-anchor="middle" fill="#fef3c7">Firebase Auth</text>
+        </g>
+
+        <!-- Backend Box (Emerald) -->
+        <g transform="translate(430, 280)" filter="url(#shadow)">
+            <rect width="240" height="100" rx="10" fill="#059669" />
+            <text x="120" y="45" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">Backend Server</text>
+            <text x="120" y="70" font-size="14" font-weight="500" text-anchor="middle" fill="#d1fae5">Node.js / Express API</text>
+        </g>
+
+        <!-- ML Box (Violet) -->
+        <g transform="translate(430, 500)" filter="url(#shadow)">
+            <rect width="240" height="100" rx="10" fill="#7c3aed" />
+            <text x="120" y="45" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">Recommendation Engine</text>
+            <text x="120" y="70" font-size="14" font-weight="500" text-anchor="middle" fill="#ede9fe">AI / ML Models</text>
+        </g>
+
+        <!-- DB Box (Slate) -->
+        <g transform="translate(780, 280)" filter="url(#shadow)">
+            <rect width="240" height="100" rx="10" fill="#475569" />
+            <text x="120" y="45" font-size="20" font-weight="700" text-anchor="middle" fill="#ffffff">Database</text>
+            <text x="120" y="70" font-size="14" font-weight="500" text-anchor="middle" fill="#e2e8f0">PostgreSQL / MongoDB</text>
+        </g>
+
+    </g>
+</svg>
