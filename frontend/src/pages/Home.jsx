@@ -29,8 +29,11 @@ const Home = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           {user ? (
             <>
-              <Link to="/dashboard" className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm shadow-blue-200 transition-all hover:-translate-y-0.5">
-                Go to Dashboard
+              <Link 
+                to={user.role === "admin" ? "/admin" : "/dashboard"} 
+                className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm shadow-blue-200 transition-all hover:-translate-y-0.5"
+              >
+                Go to {user.role === "admin" ? "Admin Panel" : "Dashboard"}
               </Link>
               <Link to="/careers" className="px-8 py-3.5 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-lg shadow-sm transition-all">
                 Browse Careers

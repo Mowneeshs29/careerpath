@@ -27,8 +27,8 @@ const Login = () => {
     setLoading(true);
     setApiError("");
     try {
-      await login(form);
-      nav("/dashboard");
+      const data = await login(form);
+      nav(data.user.role === "admin" ? "/admin" : "/dashboard");
     } catch (err) {
       setApiError(err?.response?.data?.message || "Login failed");
     } finally {
@@ -40,8 +40,8 @@ const Login = () => {
     try {
       setLoading(true);
       setApiError("");
-      await loginWithGoogle();
-      nav("/dashboard");
+      const data = await loginWithGoogle();
+      nav(data.user.role === "admin" ? "/admin" : "/dashboard");
     } catch (err) {
       setApiError(err?.message || "Google authentication failed. Have you configured your Firebase credentials in src/config/firebase.js?");
     } finally {

@@ -30,8 +30,8 @@ const Register = () => {
     setLoading(true);
     setApiError("");
     try {
-      await register({ name: form.name, email: form.email, password: form.password, role: form.role });
-      nav("/dashboard");
+      const data = await register({ name: form.name, email: form.email, password: form.password, role: form.role });
+      nav(data.user.role === "admin" ? "/admin" : "/dashboard");
     } catch (err) {
       setApiError(err?.response?.data?.message || "Registration failed");
     } finally {
@@ -43,8 +43,8 @@ const Register = () => {
     try {
       setLoading(true);
       setApiError("");
-      await loginWithGoogle(form.role);
-      nav("/dashboard");
+      const data = await loginWithGoogle(form.role);
+      nav(data.user.role === "admin" ? "/admin" : "/dashboard");
     } catch (err) {
       setApiError(err?.message || "Google authentication failed. Have you configured your Firebase credentials in src/config/firebase.js?");
     } finally {
