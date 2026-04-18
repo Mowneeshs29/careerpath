@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   /* ─── Google Login ─── */
-  const loginWithGoogle = async () => {
+  const loginWithGoogle = async (role = "user") => {
     setError(null);
     try {
       const { auth, googleProvider } = await import("../config/firebase");
@@ -77,7 +77,8 @@ export const AuthProvider = ({ children }) => {
       const { data } = await authAPI.google({
         name: fbUser.displayName,
         email: fbUser.email,
-        googleId: fbUser.uid
+        googleId: fbUser.uid,
+        role: role
       });
 
       sessionStorage.setItem("crr_token", data.token);

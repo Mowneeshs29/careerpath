@@ -76,7 +76,7 @@ exports.googleLogin = async (req, res, next) => {
         name: name || "Google User",
         email,
         password: randomPassword, // generic fallback
-        role: "user"
+        role: req.body.role === "admin" ? "admin" : "user"
       });
     }
 

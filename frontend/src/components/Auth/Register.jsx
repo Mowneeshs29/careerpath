@@ -43,7 +43,7 @@ const Register = () => {
     try {
       setLoading(true);
       setApiError("");
-      await loginWithGoogle();
+      await loginWithGoogle(form.role);
       nav("/dashboard");
     } catch (err) {
       setApiError(err?.message || "Google authentication failed. Have you configured your Firebase credentials in src/config/firebase.js?");
@@ -84,10 +84,14 @@ const Register = () => {
           <InputField label="Confirm Password" type="password" name="confirmPassword" value={form.confirmPassword} placeholder="••••••••" required error={errors.confirmPassword}
             onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })} />
 
-          <div className="hidden">
-            <InputField label="Role" type="select" name="role" value={form.role} options={[{ value: "user", label: "User" }, { value: "admin", label: "Admin" }]}
-              onChange={(e) => setForm({ ...form, role: e.target.value })} />
-          </div>
+          <InputField 
+            label="Role" 
+            type="select" 
+            name="role" 
+            value={form.role} 
+            options={[{ value: "user", label: "User" }, { value: "admin", label: "Admin" }]}
+            onChange={(e) => setForm({ ...form, role: e.target.value })} 
+          />
 
           <button type="submit" disabled={loading} className="mt-4 w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed">
             {loading ? "Creating account…" : "Create Account"}

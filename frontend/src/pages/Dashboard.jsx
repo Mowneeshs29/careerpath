@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import { careerAPI } from "../services/api";
+import { Link } from "react-router-dom";
 import ProfileForm from "../components/Profile/ProfileForm";
 import CareerCard from "../components/Career/CareerCard";
 import Loader from "../components/Shared/Loader";
@@ -44,9 +45,20 @@ const Dashboard = () => {
             {profileComplete ? "Your profile is set up — check your recommendations!" : "Complete your profile to unlock personalised recommendations."}
           </p>
         </div>
-        <span className={`text-xs font-bold px-4 py-1.5 rounded-full ${user?.role === "admin" ? "bg-emerald-100 text-emerald-700" : "bg-blue-100 text-blue-700"}`}>
-          {user?.role === "admin" ? "Admin" : "User"}
-        </span>
+        <div className="flex items-center gap-3">
+          {user?.role === "admin" && (
+            <Link 
+              to="/admin" 
+              className="px-5 py-2.5 bg-slate-900 hover:bg-black text-white text-sm font-bold rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-slate-200"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              Admin Panel
+            </Link>
+          )}
+          <span className={`text-xs font-bold px-4 py-1.5 rounded-full ${user?.role === "admin" ? "bg-emerald-100 text-emerald-700" : "bg-blue-100 text-blue-700"}`}>
+            {user?.role === "admin" ? "Admin" : "User"}
+          </span>
+        </div>
       </div>
 
       {/* ─── Tabs ─── */}
