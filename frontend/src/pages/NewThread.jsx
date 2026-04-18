@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import axios from "axios";
+import { forumAPI } from "../services/api";
 
 const NewThread = () => {
   const { user } = useAuth();
@@ -16,7 +16,7 @@ const NewThread = () => {
       navigate("/login");
       return;
     }
-    axios.get("/api/forum/categories").then(({ data }) => {
+    forumAPI.categories().then(({ data }) => {
       setCategories(data.categories);
       setForm((prev) => ({ ...prev, category: data.categories[0] }));
     });
@@ -27,7 +27,7 @@ const NewThread = () => {
     setError("");
     setSubmitting(true);
     try {
-      const { data } = await axios.post("/api/forum", form);
+      const { data } = await forumAPI.create(form);
       navigate(`/forum/${data.thread._id}`);
     } catch (err) {
       setError(err?.response?.data?.message || "Failed to create thread");

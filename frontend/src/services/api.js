@@ -56,4 +56,15 @@ export const adminAPI = {
   stats: () => api.get("/admin/stats"),
 };
 
+/* ─── Forum ─── */
+export const forumAPI = {
+  list: (params = {}) => api.get("/forum", { params }),
+  categories: () => api.get("/forum/categories"),
+  getById: (id) => api.get(`/forum/${id}`),
+  create: (data) => api.post("/forum", data),
+  reply: (id, data) => api.post(`/forum/${id}/reply`, data),
+  removeThread: (id) => api.delete(`/forum/${id}`),
+  removeReply: (threadId, replyId) => api.delete(`/forum/${threadId}/reply/${replyId}`),
+};
+
 export default api;

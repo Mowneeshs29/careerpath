@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import axios from "axios";
+import { forumAPI } from "../services/api";
 
 const Forum = () => {
   const { user } = useAuth();
@@ -13,7 +13,7 @@ const Forum = () => {
   const fetchThreads = useCallback(async (f = filter) => {
     setLoading(true);
     try {
-      const { data } = await axios.get("/api/forum", { params: f });
+      const { data } = await forumAPI.list(f);
       setThreads(data.threads);
     } catch {
       setThreads([]);
@@ -23,7 +23,7 @@ const Forum = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("/api/forum/categories").then(({ data }) => setCategories(data.categories));
+    forumAPI.categories().then(({ data }) => setCategories(data.categories));
     fetchThreads({ q: "", category: "" });
   }, []);
 
