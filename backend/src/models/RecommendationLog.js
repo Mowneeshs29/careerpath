@@ -21,4 +21,4 @@ const recommendationLogSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.Schema.models.RecommendationLog || mongoose.model("RecommendationLog", recommendationLogSchema);
+module.exports = mongoose.model("RecommendationLog", recommendationLogSchema);
