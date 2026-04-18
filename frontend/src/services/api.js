@@ -45,6 +45,15 @@ export const adminAPI = {
   create: (data) => api.post("/admin/careers", data),
   update: (id, data) => api.put(`/admin/careers/${id}`, data),
   remove: (id) => api.delete(`/admin/careers/${id}`),
+  
+  // User Management
+  users: () => api.get("/admin/users"),
+  updateUserRole: (id, role) => api.put(`/admin/users/${id}/role`, { role }),
+  deleteUser: (id) => api.delete(`/admin/users/${id}`),
+  
+  // System Activity
+  logs: () => api.get("/admin/logs"),
+  stats: () => api.get("/admin/stats"),
 };
 
 export default api;

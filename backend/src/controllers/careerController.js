@@ -1,5 +1,6 @@
 const Career = require("../models/Career");
 const Profile = require("../models/Profile");
+const RecommendationLog = require("../models/RecommendationLog");
 const { scoreCareer } = require("../services/recommendationService");
 
 /* ─── GET /api/careers  ?q=keyword&category=Tech&page=1&limit=12 ─── */
@@ -65,12 +66,21 @@ exports.getRecommendations = async (req, res, next) => {
     scored.sort((a, b) => b.score - a.score);
     const top = scored.slice(0, 10).filter((item) => item.score > 0);
 
-    res.json({
-      recommendations: top.map(({ career, score }) => ({
-        ...career.toObject(),
-        matchScore: Math.round(score * 100) / 100,
-      })),
-    });
+    const recommendations = top.map(({ career, score }) => ({
+      ...career.toObject(),
+      matchScore: Math.round(score * 100) / 100,
+    }));
+    
+    // Non-blocking log creation
+    RecommendationLog.create({
+      userId: req.user._id,
+      userName: req.user.name,
+      userEmail: req.user.email,
+      recommendationsCount: recommendations.length,
+      topMatches: recommendations.map(r => r.title).slice(0, 3)
+    }).catch(err => console.error("Logging error:", err));
+
+    res.json({ recommendations });
   } catch (err) {
     next(err);
   }

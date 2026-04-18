@@ -17,15 +17,15 @@ const EDU_OPTIONS = [
 
 const emptyForm = { title: "", category: "", description: "", requiredSkills: "", educationLevel: "Bachelor's", salaryMin: "", salaryMax: "" };
 
-/* ─── Analytics Dashboard View (Figure 4.3 implementation) ─── */
-const AnalyticsDashboard = () => (
+/* ─── Analytics Dashboard View ─── */
+const AnalyticsDashboard = ({ stats }) => (
   <div className="space-y-6">
     {/* KPI Cards */}
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
       {[
-        { title: "Total Registered Users", value: "14,245", trend: "+12.5% this month", trendUp: true },
-        { title: "Active Careers Tracked", value: "1,048", trend: "+45 imported today", trendUp: true },
-        { title: "Total Matches Made", value: "89.4k", trend: "+2,140 this week", trendUp: true },
+        { title: "Total Registered Users", value: stats.totalUsers || "...", trend: "+12.5% this month", trendUp: true },
+        { title: "Active Careers Tracked", value: stats.totalCareers || "...", trend: "+45 imported today", trendUp: true },
+        { title: "Total Matches Made", value: stats.totalMatches || "...", trend: "+2,140 this week", trendUp: true },
         { title: "ML Engine Status", value: "Healthy", trend: "Sys Latency: 42ms", forceGreen: true },
       ].map((kpi, i) => (
         <div key={i} className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 flex flex-col justify-between">
@@ -136,31 +136,179 @@ const AnalyticsDashboard = () => (
   </div>
 );
 
+/* ─── User Management View ─── */
+const UserManagement = ({ users, onUpdateRole, onDeleteUser }) => (
+  <div className="animate-in fade-in duration-300">
+    <div className="mb-6">
+      <h2 className="text-lg font-bold text-slate-800">User Management</h2>
+      <p className="text-sm text-slate-500 mt-1">Control user access and assign administrative privileges.</p>
+    </div>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+      <table className="w-full text-left text-sm whitespace-nowrap">
+        <thead className="bg-slate-50 text-slate-500 text-xs font-semibold uppercase tracking-wider">
+          <tr>
+            <th className="px-6 py-4 border-b border-slate-100">User</th>
+            <th className="px-6 py-4 border-b border-slate-100">Email</th>
+            <th className="px-6 py-4 border-b border-slate-100">Role</th>
+            <th className="px-6 py-4 border-b border-slate-100">Joined</th>
+            <th className="px-6 py-4 border-b border-slate-100 text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-50">
+          {users.map((u) => (
+            <tr key={u._id} className="hover:bg-slate-50">
+              <td className="px-6 py-4 font-bold text-slate-800">{u.name}</td>
+              <td className="px-6 py-4 text-slate-500">{u.email}</td>
+              <td className="px-6 py-4">
+                <span className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${u.role === 'admin' ? 'bg-amber-100 text-amber-700' : 'bg-blue-100 text-blue-700'}`}>
+                  {u.role}
+                </span>
+              </td>
+              <td className="px-6 py-4 text-slate-500">{new Date(u.createdAt).toLocaleDateString()}</td>
+              <td className="px-6 py-4 text-right">
+                <select 
+                   className="text-xs bg-slate-50 border border-slate-200 rounded px-2 py-1 mr-2 outline-none focus:ring-1 ring-blue-500"
+                   value={u.role}
+                   onChange={(e) => onUpdateRole(u._id, e.target.value)}
+                >
+                   <option value="user">User</option>
+                   <option value="admin">Admin</option>
+                </select>
+                <button 
+                  className="px-3 py-1 text-xs font-medium text-rose-600 hover:bg-rose-50 rounded"
+                  onClick={() => onDeleteUser(u._id)}
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
+
+/* ─── Recommendation Logs View ─── */
+const RecommendationLogs = ({ logs }) => (
+  <div className="animate-in fade-in duration-300">
+    <div className="mb-6">
+      <h2 className="text-lg font-bold text-slate-800">Recommendation Logs</h2>
+      <p className="text-sm text-slate-500 mt-1">Audit trail of career matches and AI engine requests.</p>
+    </div>
+    <div className="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
+      <table className="w-full text-left text-sm whitespace-nowrap">
+        <thead className="bg-slate-50 text-slate-500 text-xs font-semibold uppercase tracking-wider">
+          <tr>
+            <th className="px-6 py-4 border-b border-slate-100">User</th>
+            <th className="px-6 py-4 border-b border-slate-100">Type</th>
+            <th className="px-6 py-4 border-b border-slate-100">Matches</th>
+            <th className="px-6 py-4 border-b border-slate-100">Top Result</th>
+            <th className="px-6 py-4 border-b border-slate-100">Timestamp</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-50">
+          {logs.map((l) => (
+            <tr key={l._id} className="hover:bg-slate-50">
+              <td className="px-6 py-4">
+                 <div className="font-bold text-slate-800">{l.userName}</div>
+                 <div className="text-[10px] text-slate-400">{l.userEmail}</div>
+              </td>
+              <td className="px-6 py-4">
+                 <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">{l.calculationType || 'Cosine Similarity'}</span>
+              </td>
+              <td className="px-6 py-4 text-slate-500">{l.recommendationsCount}</td>
+              <td className="px-6 py-4 text-slate-500 truncate max-w-[150px]">{l.topMatches?.[0] || 'N/A'}</td>
+              <td className="px-6 py-4 text-slate-500">{new Date(l.timestamp).toLocaleString()}</td>
+            </tr>
+          ))}
+          {!logs.length && (
+            <tr><td colSpan={5} className="p-8 text-center text-slate-500 font-medium italic">No matches logged yet.</td></tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
+
+/* ─── API Integrations View ─── */
+const APIIntegrations = () => (
+  <div className="animate-in fade-in duration-300">
+    <div className="mb-6">
+      <h2 className="text-lg font-bold text-slate-800">External Integrations</h2>
+      <p className="text-sm text-slate-500 mt-1">Configure external data sources and ML engine sync settings.</p>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+         <div className="flex justify-between items-start mb-4">
+            <h3 className="font-bold text-slate-800">Firebase Auth</h3>
+            <span className="px-2 py-0.5 bg-emerald-100 text-emerald-700 rounded text-[10px] font-black uppercase">Active</span>
+         </div>
+         <p className="text-xs text-slate-500 mb-4">Handles Google OAuth and user session persistence.</p>
+         <div className="text-[10px] font-mono bg-slate-50 p-2 rounded text-slate-400 break-all">PROJECT_ID: career-path-v1</div>
+      </div>
+      
+      <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm opacity-60 grayscale cursor-not-allowed">
+         <div className="flex justify-between items-start mb-4">
+            <h3 className="font-bold text-slate-800">LinkedIn Jobs API</h3>
+            <span className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-black uppercase">Coming Soon</span>
+         </div>
+         <p className="text-xs text-slate-500 mb-4">Automate career database updates from global job postings.</p>
+      </div>
+
+      <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm opacity-60 grayscale cursor-not-allowed">
+         <div className="flex justify-between items-start mb-4">
+            <h3 className="font-bold text-slate-800">OpenAI Engine</h3>
+            <span className="px-2 py-0.5 bg-slate-100 text-slate-500 rounded text-[10px] font-black uppercase">Coming Soon</span>
+         </div>
+         <p className="text-xs text-slate-500 mb-4">AI-driven summary generation for career descriptions.</p>
+      </div>
+    </div>
+  </div>
+);
+
 
 const AdminPanel = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("dashboard"); // 'dashboard' or 'careers'
+  const [activeTab, setActiveTab] = useState("dashboard"); // 'dashboard' | 'careers' | 'users' | 'logs' | 'api'
   
   // existing state 
   const [careers, setCareers] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [logs, setLogs] = useState([]);
+  const [stats, setStats] = useState({});
+
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
   const [editId, setEditId] = useState(null);
   const [form, setForm] = useState(emptyForm);
   const [apiError, setApiError] = useState("");
 
-  const fetchCareers = useCallback(async () => {
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setApiError("");
     try {
-      const { data } = await adminAPI.list();
-      setCareers(data.careers);
+      if (activeTab === "dashboard") {
+        const { data } = await adminAPI.stats();
+        setStats(data.stats);
+      } else if (activeTab === "careers") {
+        const { data } = await adminAPI.list();
+        setCareers(data.careers);
+      } else if (activeTab === "users") {
+        const { data } = await adminAPI.users();
+        setUsers(data.users);
+      } else if (activeTab === "logs") {
+        const { data } = await adminAPI.logs();
+        setLogs(data.logs);
+      }
     } catch (e) {
-      setApiError(e?.response?.data?.message || "Failed to load");
+      setApiError(e?.response?.data?.message || "Failed to load relevant administration data");
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [activeTab]);
 
-  useEffect(() => { fetchCareers(); }, [fetchCareers]);
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   const openCreate = () => { setEditId(null); setForm(emptyForm); setModalOpen(true); };
 
@@ -196,7 +344,7 @@ const AdminPanel = () => {
         await adminAPI.create(payload);
       }
       setModalOpen(false);
-      await fetchCareers();
+      await fetchData();
     } catch (err) {
       setApiError(err?.response?.data?.message || "Save failed");
     }
@@ -209,6 +357,25 @@ const AdminPanel = () => {
       setCareers((prev) => prev.filter((c) => c._id !== id));
     } catch (err) {
       setApiError(err?.response?.data?.message || "Delete failed");
+    }
+  };
+
+  const handleUpdateUserRole = async (userId, role) => {
+    try {
+      await adminAPI.updateUserRole(userId, role);
+      setUsers((prev) => prev.map(u => u._id === userId ? { ...u, role } : u));
+    } catch (err) {
+      alert(err?.response?.data?.message || "Failed to update role");
+    }
+  };
+
+  const handleDeleteUser = async (userId) => {
+    if (!window.confirm("Are you sure you want to delete this user? This cannot be undone.")) return;
+    try {
+      await adminAPI.deleteUser(userId);
+      setUsers((prev) => prev.filter(u => u._id !== userId));
+    } catch (err) {
+      alert(err?.response?.data?.message || "Failed to delete user");
     }
   };
 
@@ -232,10 +399,9 @@ const AdminPanel = () => {
         <nav className="flex-1 px-4 space-y-1.5 font-medium mt-4">
            <button onClick={() => setActiveTab('dashboard')} className={`w-full text-left px-4 py-3 rounded-lg flex items-center transition-colors ${activeTab==='dashboard'? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800'}`}>Analytics Dashboard</button>
            <button onClick={() => setActiveTab('careers')} className={`w-full text-left px-4 py-3 rounded-lg flex items-center transition-colors ${activeTab==='careers'? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800'}`}>Career Database</button>
-           
-           <div className="px-4 py-3 text-slate-500 cursor-not-allowed">User Management</div>
-           <div className="px-4 py-3 text-slate-500 cursor-not-allowed">Recommendation Logs</div>
-           <div className="px-4 py-3 text-slate-500 cursor-not-allowed">API Integrations</div>
+           <button onClick={() => setActiveTab('users')} className={`w-full text-left px-4 py-3 rounded-lg flex items-center transition-colors ${activeTab==='users'? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800'}`}>User Management</button>
+           <button onClick={() => setActiveTab('logs')} className={`w-full text-left px-4 py-3 rounded-lg flex items-center transition-colors ${activeTab==='logs'? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800'}`}>Recommendation Logs</button>
+           <button onClick={() => setActiveTab('api')} className={`w-full text-left px-4 py-3 rounded-lg flex items-center transition-colors ${activeTab==='api'? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800'}`}>API Integrations</button>
         </nav>
         
         <div className="p-4 mb-2">
@@ -258,7 +424,10 @@ const AdminPanel = () => {
                   <div className="w-5 h-[2px] bg-slate-500 rounded"></div>
                </div>
                <h1 className="text-xl font-bold text-slate-800 tracking-tight">
-                   {activeTab === 'dashboard' ? 'Platform Overview' : 'Career Database Management'}
+                   {activeTab === 'dashboard' ? 'Platform Overview' : 
+                    activeTab === 'careers'   ? 'Career Database Management' :
+                    activeTab === 'users'     ? 'User Access Control' :
+                    activeTab === 'logs'      ? 'System Activity Logs' : 'External Integrations'}
                </h1>
            </div>
 
@@ -270,7 +439,13 @@ const AdminPanel = () => {
         {/* Scrollable Content Area */}
         <div className="flex-1 overflow-y-auto p-8 bg-slate-50">
            
-           {activeTab === 'dashboard' && <AnalyticsDashboard />}
+           {activeTab === 'dashboard' && <AnalyticsDashboard stats={stats} />}
+           
+           {activeTab === 'users' && <UserManagement users={users} onUpdateRole={handleUpdateUserRole} onDeleteUser={handleDeleteUser} />}
+
+           {activeTab === 'logs' && <RecommendationLogs logs={logs} />}
+
+           {activeTab === 'api' && <APIIntegrations />}
            
            {activeTab === 'careers' && (
              <div className="animate-in fade-in duration-300">
