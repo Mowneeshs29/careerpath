@@ -1,6 +1,6 @@
 const Career = require("../models/Career");
 const User = require("../models/User");
-const RecommendationLog = require("../models/RecommendationLog");
+const SystemActivity = require("../models/SystemActivity");
 
 /* ─── POST /api/admin/careers ─── */
 exports.createCareer = async (req, res, next) => {
@@ -85,7 +85,7 @@ exports.deleteUser = async (req, res, next) => {
 /* ─── GET /api/admin/logs  (admin only) ─── */
 exports.getLogs = async (req, res, next) => {
   try {
-    const logs = await RecommendationLog.find().sort({ timestamp: -1 }).limit(100);
+    const logs = await SystemActivity.find().sort({ timestamp: -1 }).limit(100);
     res.json({ logs });
   } catch (err) {
     next(err);
@@ -98,7 +98,7 @@ exports.getStats = async (req, res, next) => {
     const [userCount, careerCount, logCount] = await Promise.all([
       User.countDocuments(),
       Career.countDocuments(),
-      RecommendationLog.countDocuments()
+      SystemActivity.countDocuments()
     ]);
     res.json({ 
       stats: {

@@ -1,4 +1,5 @@
 const ForumThread = require("../models/ForumThread");
+const SystemActivity = require("../models/SystemActivity");
 
 // Get all threads with filters
 exports.getAllThreads = async (req, res, next) => {
@@ -70,6 +71,16 @@ exports.createThread = async (req, res, next) => {
     });
 
     await thread.populate("author", "name email");
+
+    // Notice to Admin
+    SystemActivity.create({
+      userId: req.user.id,
+      userName: req.user.name,
+      userEmail: req.user.email,
+      type: "Forum Thread",
+      details: `Started a new discussion: "${title}" in ${category}`
+    }).catch(err => console.error("Logging error:", err));
+
     res.status(201).json({ thread });
   } catch (err) {
     next(err);
@@ -93,6 +104,15 @@ exports.addReply = async (req, res, next) => {
 
     await thread.save();
     await thread.populate("replies.author", "name role");
+
+    // Notice to Admin
+    SystemActivity.create({
+      userId: req.user.id,
+      userName: req.user.name,
+      userEmail: req.user.email,
+      type: "Forum Reply",
+      details: `Replied to thread: "${thread.title}"`
+    }).catch(err => console.error("Logging error:", err));
 
     res.json({ thread });
   } catch (err) {

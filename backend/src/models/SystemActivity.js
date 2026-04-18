@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const recommendationLogSchema = new mongoose.Schema({
+const systemActivitySchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -8,11 +8,12 @@ const recommendationLogSchema = new mongoose.Schema({
   },
   userEmail: String,
   userName: String,
-  calculationType: {
+  type: {
     type: String,
-    enum: ["Cosine Similarity", "Skills Match", "Manual Request"],
-    default: "Cosine Similarity",
+    enum: ["Recommendation", "Forum Thread", "Forum Reply", "Profile Update"],
+    default: "Recommendation",
   },
+  details: String, // dynamic description
   recommendationsCount: Number,
   topMatches: [String],
   timestamp: {
@@ -21,4 +22,4 @@ const recommendationLogSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("RecommendationLog", recommendationLogSchema);
+module.exports = mongoose.model("SystemActivity", systemActivitySchema);

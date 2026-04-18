@@ -1,6 +1,6 @@
 const Career = require("../models/Career");
 const Profile = require("../models/Profile");
-const RecommendationLog = require("../models/RecommendationLog");
+const SystemActivity = require("../models/SystemActivity");
 const { scoreCareer } = require("../services/recommendationService");
 
 /* ─── GET /api/careers  ?q=keyword&category=Tech&page=1&limit=12 ─── */
@@ -72,10 +72,12 @@ exports.getRecommendations = async (req, res, next) => {
     }));
     
     // Non-blocking log creation
-    RecommendationLog.create({
+    SystemActivity.create({
       userId: req.user._id,
       userName: req.user.name,
       userEmail: req.user.email,
+      type: "Recommendation",
+      details: `Generated ${recommendations.length} recommendations for user.`,
       recommendationsCount: recommendations.length,
       topMatches: recommendations.map(r => r.title).slice(0, 3)
     }).catch(err => console.error("Logging error:", err));

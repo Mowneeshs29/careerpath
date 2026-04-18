@@ -201,9 +201,8 @@ const RecommendationLogs = ({ logs }) => (
         <thead className="bg-slate-50 text-slate-500 text-xs font-semibold uppercase tracking-wider">
           <tr>
             <th className="px-6 py-4 border-b border-slate-100">User</th>
-            <th className="px-6 py-4 border-b border-slate-100">Type</th>
-            <th className="px-6 py-4 border-b border-slate-100">Matches</th>
-            <th className="px-6 py-4 border-b border-slate-100">Top Result</th>
+            <th className="px-6 py-4 border-b border-slate-100">Action Type</th>
+            <th className="px-6 py-4 border-b border-slate-100">Activity Details</th>
             <th className="px-6 py-4 border-b border-slate-100">Timestamp</th>
           </tr>
         </thead>
@@ -215,15 +214,18 @@ const RecommendationLogs = ({ logs }) => (
                  <div className="text-[10px] text-slate-400">{l.userEmail}</div>
               </td>
               <td className="px-6 py-4">
-                 <span className="px-2 py-0.5 bg-slate-100 text-slate-600 rounded text-[10px] font-bold">{l.calculationType || 'Cosine Similarity'}</span>
+                 <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                   l.type === 'Recommendation' ? 'bg-blue-100 text-blue-700' :
+                   l.type === 'Forum Thread' ? 'bg-emerald-100 text-emerald-700' :
+                   l.type === 'Forum Reply' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-600'
+                 }`}>{l.type}</span>
               </td>
-              <td className="px-6 py-4 text-slate-500">{l.recommendationsCount}</td>
-              <td className="px-6 py-4 text-slate-500 truncate max-w-[150px]">{l.topMatches?.[0] || 'N/A'}</td>
+              <td className="px-6 py-4 text-slate-500 italic max-w-xs truncate">{l.details}</td>
               <td className="px-6 py-4 text-slate-500">{new Date(l.timestamp).toLocaleString()}</td>
             </tr>
           ))}
           {!logs.length && (
-            <tr><td colSpan={5} className="p-8 text-center text-slate-500 font-medium italic">No matches logged yet.</td></tr>
+            <tr><td colSpan={4} className="p-8 text-center text-slate-500 font-medium italic">No activity logged yet.</td></tr>
           )}
         </tbody>
       </table>
