@@ -17,8 +17,5 @@
   "bugs": {
     "url": "https://github.com/Mowneeshs29/careerpath/issues"
   },
-  "homepage": "https://github.com/Mowneeshs29/careerpath#readme",
-  "devDependencies": {
-    "vite": "^8.0.0"
-  }
+  "homepage": "https://github.com/Mowneeshs29/careerpath#readme"
 }
